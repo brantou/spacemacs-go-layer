@@ -9,7 +9,7 @@
 ;;
 ;;; License: GPLv3
 
-(setq go-packages
+(setq gop-packages
       '(
         company
         (company-go :toggle
@@ -33,10 +33,10 @@
         ))
 
 
-(defun go/post-init-company ()
+(defun gop/post-init-company ()
   (spacemacs|add-company-hook go-mode))
 
-(defun go/init-company-go ()
+(defun gop/init-company-go ()
   (use-package company-go
     :defer t
     :init
@@ -44,10 +44,10 @@
       (setq company-go-show-annotation t)
       (push 'company-go company-backends-go-mode))))
 
-(defun go/post-init-flycheck ()
+(defun gop/post-init-flycheck ()
   (spacemacs/add-flycheck-hook 'go-mode))
 
-(defun go/init-go-mode()
+(defun gop/init-go-mode()
   (when (memq window-system '(mac ns x))
     (dolist (var '("GOPATH" "GO15VENDOREXPERIMENT"))
       (unless (getenv var)
@@ -127,10 +127,10 @@
         "tp" 'spacemacs/go-run-package-tests
         "tP" 'spacemacs/go-run-package-tests-nested))))
 
-(defun go/init-go-eldoc()
+(defun gop/init-go-eldoc()
   (add-hook 'go-mode-hook 'go-eldoc-setup))
 
-(defun go/init-go-guru()
+(defun gop/init-go-guru()
   (spacemacs/declare-prefix-for-mode 'go-mode "mf" "guru")
   (spacemacs/set-leader-keys-for-major-mode 'go-mode
     "fd" 'go-guru-describe
@@ -146,14 +146,14 @@
     "f>" 'go-guru-callees
     "fo" 'go-guru-set-scope))
 
-(defun go/init-go-rename()
+(defun gop/init-go-rename()
   (use-package go-rename
     :defer t
     :init
     (spacemacs/declare-prefix-for-mode 'go-mode "mr" "refactor")
     (spacemacs/set-leader-keys-for-major-mode 'go-mode "rn" 'go-rename)))
 
-(defun go/init-go-tag()
+(defun gop/init-go-tag()
   (use-package go-tag
     :defer t
     :init
@@ -162,19 +162,19 @@
       "rF" 'go-tag-remove
       "rf" 'go-tag-add)))
 
-(defun go/init-go-impl()
+(defun gop/init-go-impl()
   (use-package go-impl
     :defer t
     :init (spacemacs/set-leader-keys-for-major-mode 'go-mode
             "ri" 'go-impl)))
 
-(defun go/init-go-fill-struct ()
+(defun gop/init-go-fill-struct ()
   (use-package go-fill-struct
     :defer t
     :init (spacemacs/set-leader-keys-for-major-mode 'go-mode
             "rs" 'go-fill-struct)))
 
-(defun go/init-godoctor ()
+(defun gop/init-godoctor ()
   (use-package godoctor
     :defer t
     :init (spacemacs/set-leader-keys-for-major-mode 'go-mode
@@ -183,17 +183,18 @@
             "rn" 'godoctor-rename
             "rt" 'godoctor-toggle)))
 
-(defun go/init-go-gen-test()
+(defun gop/init-go-gen-test()
   (use-package go-gen-test
     :defer t
     :init
     (progn
+      (spacemacs/declare-prefix-for-mode 'go-mode "mtg" "gen-test")
       (spacemacs/set-leader-keys-for-major-mode 'go-mode
         "tgg" 'go-gen-test-dwim
         "tgf" 'go-gen-test-exported
         "tgF" 'go-gen-test-all))))
 
-(defun go/init-flycheck-gometalinter()
+(defun gop/init-flycheck-gometalinter()
   (use-package flycheck-gometalinter
     :defer t
     :init
