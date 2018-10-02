@@ -30,8 +30,9 @@
         go-tag
         ;; for test
         go-gen-test
+        ;; for org-babel
+        ob-go
         ))
-
 
 (defun gop/post-init-company ()
   (spacemacs|add-company-hook go-mode))
@@ -199,3 +200,11 @@
     :defer t
     :init
     (add-hook 'go-mode-hook 'spacemacs//go-enable-gometalinter t)))
+
+(defun gop/pre-init-ob-go ()
+   (spacemacs|use-package-add-hook org
+     :post-config
+     (use-package ob-go
+       :init (add-to-list 'org-babel-load-languages '(go . t)))))
+
+(defun gop/init-ob-go ())
