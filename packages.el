@@ -32,6 +32,10 @@
         go-gen-test
         ;; for org-babel
         ob-go
+        ;; for go-imenu
+        (go-imenu :location (recipe :fetcher github
+                                    :repo "brantou/go-imenu.el"
+                                    :files ("go-imenu.el")))
         ))
 
 (defun gop/post-init-company ()
@@ -208,3 +212,6 @@
        :init (add-to-list 'org-babel-load-languages '(go . t)))))
 
 (defun gop/init-ob-go ())
+
+(defun gop/init-go-imenu()
+  (add-hook 'go-mode-hook 'go-imenu-setup))
